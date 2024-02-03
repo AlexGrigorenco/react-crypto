@@ -10,7 +10,7 @@ const contentStyle = {
 
 const AppContent = () => {
     return ( 
-        <Layout.Content className='app-content'>Content</Layout.Content>
+        <Layout.Content id='app-content'>Content</Layout.Content>
      );
 }
  

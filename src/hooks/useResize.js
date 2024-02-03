@@ -21,15 +21,6 @@ export const useResize = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  
-  console.log({
-    width,
-    isScreenSm: width >= mediaQueries.SCREEN_SM,
-    isScreenMd: width >= mediaQueries.SCREEN_MD,
-    isScreenLg: width >= mediaQueries.SCREEN_LG,
-    isScreenXl: width >= mediaQueries.SCREEN_XL,
-    isScreenXxl: width >= mediaQueries.SCREEN_XXL,
-  })
 
   return {
     width,

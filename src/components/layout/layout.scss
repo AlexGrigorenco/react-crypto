@@ -2,16 +2,19 @@
     min-height: 100dvh;
 }
 
-.app-header{
+#app-header{
     color: #fff;
     height: 60px;
     background-color: #4096ff;
 }
 
 #app-sidebar{
+    color: #fff;
     background-color: #1677ff;
 }
 
-.app-content{
-
+#app-content{
+    color: #fff;
+    background-color: #001529;
+    padding: 1rem;
 }
