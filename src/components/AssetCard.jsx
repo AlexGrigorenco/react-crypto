@@ -1,34 +1,41 @@
-import { Card, Statistic, List, Typography } from "antd";
+import { Card, Statistic, List, Typography, Tag } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
+import { capitalise } from "../utils";
 
-const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
-  ];
 
-const AssetCard = ({ children }) => {
+const AssetCard = ({asset}) => {
   return (
     <Card style={{ margin: 10 }}>
       <Statistic
-        title="Active"
-        value={11.28}
+        title={capitalise(asset.id)}
+        value={asset.totalAmount}
         precision={2}
-        valueStyle={{ color: children === "up" ? "#3f8600" : "#cf1322" }}
-        prefix={children === "up" ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
-        suffix="%"
+        valueStyle={{ color: asset.grow ? "#3f8600" : "#cf1322" }}
+        prefix={asset.grow ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
+        suffix="$"
       />
 
       <List
-        dataSource={data}
+        dataSource={[
+            {title: 'TotalProfit', value: asset.totalProfit.toFixed(2) + ' $', textcolor: asset.grow ? 'success' : 'danger'},
+            {title: 'Asset Amount', value: asset.amount},
+            {title: 'Difference', value: asset.growPercent + ' %', textcolor: asset.grow ? 'green' : 'red', Tag: true},
+        ]}
         renderItem={(item) => (
           <List.Item>
-            <Typography.Text mark>[ITEM]</Typography.Text> {item}
+            <Typography.Text>
+            {item.title}
+            </Typography.Text>
+            {item.Tag && <Tag color={item.textcolor }>
+                {item.value}
+            </Tag>}
+            {!item.Tag && <Typography.Text type={item.textcolor }>
+                {item.value}
+            </Typography.Text>}
           </List.Item>
         )}
       />
+      
     </Card>
   );
 };
