@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 export const useResize = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
-  const mediaQueries = {
+  const breakpoints = {
     SCREEN_SM: 576,
     SCREEN_MD: 768,
     SCREEN_LG: 992,
@@ -24,10 +24,11 @@ export const useResize = () => {
 
   return {
     width,
-    isScreenSm: width >= mediaQueries.SCREEN_SM,
-    isScreenMd: width >= mediaQueries.SCREEN_MD,
-    isScreenLg: width >= mediaQueries.SCREEN_LG,
-    isScreenXl: width >= mediaQueries.SCREEN_XL,
-    isScreenXxl: width >= mediaQueries.SCREEN_XXL,
+    xm: width < breakpoints.SCREEN_SM,
+    sm: width >= breakpoints.SCREEN_SM && width <= breakpoints.SCREEN_MD,
+    md: width > breakpoints.SCREEN_MD && width <= breakpoints.SCREEN_LG,
+    lg: width > breakpoints.SCREEN_LG && width <= breakpoints.SCREEN_XL,
+    xl: width > breakpoints.SCREEN_XL && width <= breakpoints.SCREEN_XXL,
+    xxl: width > breakpoints.SCREEN_XXL,
   };
 };

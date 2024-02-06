@@ -1,10 +1,19 @@
-import { Layout, Card } from "antd";
+import { Layout } from "antd";
 import { useResize } from "../../hooks/useResize";
+import AssetsList from "../AssetsList";
 
 const AppSideBar = () => {
+  const { xm, sm, md } = useResize();
+
   function setSideBarWidth() {
-    if (useResize().width < 768) {
+    if (xm) {
       return "80%";
+    }
+    if (sm) {
+      return "60%";
+    }
+    if (md) {
+      return "40%";
     }
     return "25%";
   }
@@ -14,18 +23,9 @@ const AppSideBar = () => {
       width={setSideBarWidth()}
       breakpoint="md"
       collapsedWidth="0"
-      onBreakpoint={(broken) => {
-        console.log(broken);
-      }}
-      onCollapse={(collapsed, type) => {
-        console.log(collapsed, type);
-      }}
       id="app-sidebar"
     >
-      <Card
-        style={{ margin: 10 }}
-      >
-      </Card>
+      <AssetsList />
     </Layout.Sider>
   );
 };
