@@ -1,12 +1,12 @@
 import { Space, Select, Typography } from "antd";
 import { useCrypto } from "../context/crypto-context";
 
-const handleSelect = (value) => {
-    console.log(`selected ${value}`);
-  };
-
-const CryptoSelect = () => {
+const CryptoSelect = ({func}) => {
     const {crypto} = useCrypto()
+
+    const handleSelect = (value) => {
+        func(value)
+      };
 
     return ( 
         <Select
