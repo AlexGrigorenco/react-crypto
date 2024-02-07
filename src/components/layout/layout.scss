@@ -5,11 +5,13 @@
 
 #app-header{
     color: #fff;
-    height: 80px;
+    min-height: 80px;
     background-color: #001529;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
 
     .select{
         width: 100%;
