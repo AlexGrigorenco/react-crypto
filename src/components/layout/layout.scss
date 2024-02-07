@@ -1,16 +1,29 @@
 .layout{
     min-height: 100dvh;
+    
 }
 
 #app-header{
     color: #fff;
-    height: 60px;
-    background-color: #4096ff;
+    height: 80px;
+    background-color: #001529;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .select{
+        width: 100%;
+        max-width: 250px;
+
+        .ant-select-selection-placeholder{
+            color: #000;
+        }
+    }
 }
 
 #app-sidebar{
     color: #fff;
-    background-color: #1677ff;
+    background-color: #001529;
 }
 
 #app-content{
