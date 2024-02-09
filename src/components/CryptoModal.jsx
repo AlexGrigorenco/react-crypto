@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const Cryptomodal = ({ data, isOpen, closeModal }) => {
   const [showMore, setShowMore] = useState(false);
-  console.log(data);
+  
   return (
     <Modal
       style={{ maxWidth: "90%" }}
@@ -96,7 +96,7 @@ const Cryptomodal = ({ data, isOpen, closeModal }) => {
             {data.twitterUrl && <><div>Reddit: </div><a href={data.twitterUrl} target="_blank" >{data.twitterUrl}</a></>}
             <br />
             {data.explorers && <>
-            <div>Explorers</div>
+            <div>Explorers: </div>
             {data.explorers.map(link => (
                 <a href={link} style={{display:'block', lineHeight: '1.3'}} target="_blank">{link}</a>
             ))}
