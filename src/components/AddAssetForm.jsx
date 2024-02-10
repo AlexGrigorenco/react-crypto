@@ -1,7 +1,9 @@
 import { Form, DatePicker, TimePicker, InputNumber, Button } from "antd";
+import { useState } from "react";
 
 const AddAssetForm = ({ coin }) => {
   const [form] = Form.useForm();
+  const [disableTime, setDisableTime] = useState(true)
 
   function onFinish(values) {
     console.log("values:", values);
@@ -18,11 +20,24 @@ const AddAssetForm = ({ coin }) => {
             });
             return;
         }
-
         form.setFieldsValue({
             total: +(changedValue.amount * allValues.price).toFixed(2),
         });
     }
+    if(changedValue.date){
+      setDisableTime(false)
+    }
+}
+
+function disabledDateFunction(current) {
+  const currentDate = new Date();
+  return current && current > currentDate;
+}
+console.log(form.getFieldValue().date)
+function disableTimeOptions(date){
+  return {
+    disabledHours: () => [22, 23]
+  }
 }
 
 
@@ -89,20 +104,17 @@ const AddAssetForm = ({ coin }) => {
           },
         ]}
       >
-        <DatePicker style={{ width: "100%" }} />
+        <DatePicker style={{ width: "100%" }} disabledDate={disabledDateFunction}/>
       </Form.Item>
 
       <Form.Item
         label="Time"
         name="time"
-        rules={[
-          {
-            required: true,
-            message: "Please choise time",
-          },
-        ]}
       >
-        <TimePicker style={{ width: "100%" }} />
+        <TimePicker 
+        disabledTime={disableTimeOptions}
+        disabled={disableTime}
+        style={{ width: "100%" }} />
       </Form.Item>
 
       <Form.Item
