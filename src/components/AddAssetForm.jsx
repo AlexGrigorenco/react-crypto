@@ -1,18 +1,17 @@
 import { Form, DatePicker, TimePicker, InputNumber, Button } from "antd";
+import { disabledDateFunction, isToday, getRemainingHours } from "../utils";
 import { useState } from "react";
 
 const AddAssetForm = ({ coin }) => {
   const [form] = Form.useForm();
   const [disableTime, setDisableTime] = useState(true)
+  const [today, setToday] = useState(false)
 
   function onFinish(values) {
     console.log("values:", values);
   }
 
   function changeValues(changedValue, allValues) {
-    console.log(changedValue);
-    console.log(allValues);
-
     if(changedValue.amount || changedValue.amount === 0 || changedValue.price || changedValue.price === 0){
         if (allValues.amount < 0 || allValues.price < 0 || allValues.amount === undefined) {
             form.setFieldsValue({
@@ -26,20 +25,18 @@ const AddAssetForm = ({ coin }) => {
     }
     if(changedValue.date){
       setDisableTime(false)
+      setToday(isToday(form.getFieldValue().date))
     }
 }
 
-function disabledDateFunction(current) {
-  const currentDate = new Date();
-  return current && current > currentDate;
-}
-console.log(form.getFieldValue().date)
-function disableTimeOptions(date){
-  return {
-    disabledHours: () => [22, 23]
+function disableTimeOptions(){  
+  if(today){
+    const disabledHours = getRemainingHours()
+    return {
+      disabledHours: () => disabledHours
+    }
   }
 }
-
 
   return (
     <Form
