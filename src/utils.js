@@ -32,3 +32,24 @@ export function getRemainingHours() {
 
   return remainingHours;
 }
+
+export function validateTime(h, m, s) {
+  const currentDate = new Date();
+  const currentHours = currentDate.getHours();
+  const currentMinutes = currentDate.getMinutes();
+  const currentSeconds = currentDate.getSeconds();
+
+  if (
+    currentHours < h ||
+    (currentHours === h && currentMinutes < m) ||
+    (currentHours === h &&
+      currentMinutes === m &&
+      currentSeconds < s)
+  ) {
+    console.log("Текущее время больше желаемого времени.");
+    return false
+  } else {
+    console.log("Текущее время меньше или равно равно желаемому времени.");
+    return true
+  }
+}

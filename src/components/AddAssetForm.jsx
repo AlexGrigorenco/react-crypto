@@ -1,5 +1,5 @@
 import { Form, DatePicker, TimePicker, InputNumber, Button } from "antd";
-import { disabledDateFunction, isToday, getRemainingHours } from "../utils";
+import { disabledDateFunction, isToday, getRemainingHours, validateTime } from "../utils";
 import { useState } from "react";
 
 const AddAssetForm = ({ coin }) => {
@@ -26,6 +26,16 @@ const AddAssetForm = ({ coin }) => {
     if(changedValue.date){
       setDisableTime(false)
       setToday(isToday(form.getFieldValue().date))
+    }
+    if(changedValue.time){
+      if(today){
+        console.log(changedValue.time)
+        if(!validateTime(changedValue.time.$H, changedValue.time.$m, changedValue.time.$s)){
+          form.setFieldsValue({
+            time: undefined,
+        });
+        }
+      }
     }
 }
 
