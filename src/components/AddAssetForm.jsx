@@ -15,15 +15,16 @@ const AddAssetForm = ({ coin, getResultData }) => {
   const [today, setToday] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  function onFinish(values) {
-    console.log("values:", values);
+  function onFinish(values) {    
     addAsset({
       amount: values.amount,
-      date: values.date.$d.toString(),
+      date: values.date.$d.toString().split(' ').slice(0, 4).join(' '),
       id: coin.id,
       price: values.price,
       icon: coin.icon,
+      time: values.time ? values.time.$d.toString().split(' ')[4] : values.time,
     });
+
     getResultData({
       name: coin.name,
       amount: values.amount,

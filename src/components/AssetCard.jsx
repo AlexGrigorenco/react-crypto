@@ -42,7 +42,7 @@ const AssetCard = ({asset}) => {
           </List.Item>
         )}
       />
-      <div style={{textAlign: 'right', color: '#000', opacity: '0.5'}}>{asset.date}</div>
+      <div style={{textAlign: 'right', color: '#000', opacity: '0.5'}}>{asset.date} {asset.time && asset.time}</div>
     </Card>
   );
 };

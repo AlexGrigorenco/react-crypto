@@ -57,17 +57,18 @@ export function CryptoContextProvider({ children }) {
 
   function addAsset(asset) {
     const coin = crypto.find((c) => c.id === asset.id);
-    setAssets((prevAssets) => [
-        ...prevAssets,
-        {
-          grow: asset.price < coin.price,
-          growPercent: calculatePercentageDifference(asset.price, coin.price),
-          totalAmount: asset.amount * coin.price,
-          totalProfit: asset.amount * coin.price - asset.amount * asset.price,
-          ...asset,
-        },
-      ]);
-      localStorage.setItem("cryptoAssets", JSON.stringify(assets));
+    const updatedAssets = [
+      {
+        grow: asset.price < coin.price,
+        growPercent: calculatePercentageDifference(asset.price, coin.price),
+        totalAmount: asset.amount * coin.price,
+        totalProfit: asset.amount * coin.price - asset.amount * asset.price,
+        ...asset,
+      },
+      ...assets,
+    ];
+    setAssets(updatedAssets);
+    localStorage.setItem("cryptoAssets", JSON.stringify(updatedAssets));
   }
 
   return (

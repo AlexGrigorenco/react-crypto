@@ -87,7 +87,7 @@ const CryptoDrawer = ({ isOpen, closeDrawer }) => {
       )}
 
       {!coin ? <CryptoSelect func={findCoin} /> : <AddAssetForm coin={coin} getResultData={handleResult} />}
-      {result && (
+      {(result && !coin) && (
         <Result
           status="success"
           title="You added new asset!"
