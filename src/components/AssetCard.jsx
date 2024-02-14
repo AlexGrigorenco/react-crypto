@@ -1,11 +1,17 @@
-import { Card, Statistic, List, Typography, Tag } from "antd";
+import { Card, Statistic, List, Typography, Tag, Button } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import { capitalise } from "../utils";
+import { useCrypto } from "../context/crypto-context";
 
 
 const AssetCard = ({asset}) => {
+  const {removeAsset} = useCrypto()
+
   return (
     <Card style={{ margin: 10 }}>
+
+      <Button onClick={() => removeAsset(asset.id)} style={{position: 'absolute', top: '10px', right: '10px'}} type="primary" >remove asset</Button>
+      
       <Statistic
         title={capitalise(asset.id)}
         value={asset.totalAmount}
@@ -35,7 +41,7 @@ const AssetCard = ({asset}) => {
           </List.Item>
         )}
       />
-      
+      <div style={{textAlign: 'right', color: '#000', opacity: '0.5'}}>{asset.date}</div>
     </Card>
   );
 };

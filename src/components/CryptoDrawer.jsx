@@ -35,7 +35,6 @@ const CryptoDrawer = ({ isOpen, closeDrawer }) => {
   }
 
   function handleResult(data){
-    console.log(data)
     setResultData(data)
     setResult(true)
     setCoin(null)

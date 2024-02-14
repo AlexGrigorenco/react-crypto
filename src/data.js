@@ -25962,25 +25962,4 @@ export const cryptoData = {
     hasPreviousPage: false,
     hasNextPage: true,
   },
-};
-
-export const cryptoAssets = [
-  {
-    id: "bitcoin",
-    amount: 0.02,
-    price: 26244,
-    date: new Date(),
-  },
-  {
-    id: "ethereum",
-    amount: 5,
-    price: 2400,
-    date: new Date(),
-  },
-  {
-    id: "litecoin",
-    amount: 30.7,
-    price: 40,
-    date: new Date(),
-  },
-];
+}

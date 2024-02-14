@@ -7,7 +7,7 @@ import CryptoModal from "../CryptoModal";
 
 const AppHeader = () => {
   const [modal, setModal] = useState(false);
-  const [drawer, setDrawer] = useState(true);
+  const [drawer, setDrawer] = useState(false);
   const [coin, setCoin] = useState(null);
   const { crypto } = useCrypto();
 

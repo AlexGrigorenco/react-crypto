@@ -1,51 +1,89 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { fakeFetchAssets, fakeFetchCrypto } from "../api";
-import {calculatePercentageDifference} from "../utils.js"
+import { fetchAssets, fakeFetchCrypto } from "../api";
+import { calculatePercentageDifference } from "../utils.js";
 
 const CryptoContext = createContext({
-    assets:[],
-    crypto: [],
-    loading: false,
-})
+  assets: [],
+  crypto: [],
+  loading: false,
+});
 
-export function CryptoContextProvider({children}){
+export function CryptoContextProvider({ children }) {
+  const [loading, setLoading] = useState(false);
+  const [crypto, setCrypto] = useState([]);
+  const [assets, setAssets] = useState([]);
 
-    const [loading, setLoading] = useState(false)
-    const [crypto, setCrypto] = useState([])
-    const [assets, setAssets] = useState([])
-    
-    useEffect(() => {
-        async function preload(){
-            setLoading(true)
-            const {result} = await fakeFetchCrypto()
-            const assets = await fakeFetchAssets()
-            
-            setCrypto(result)
-            setAssets(assets.map((asset) => {
-                const coin = result.find(c => c.id === asset.id)
-                return {
-                    grow: asset.price < coin.price,
-                    growPercent: calculatePercentageDifference(asset.price, coin.price),
-                    totalAmount: asset.amount * coin.price,
-                    totalProfit: asset.amount * coin.price - asset.amount * asset.price,
-                    ...asset,
-                }
-            }))
-            setLoading(false)
-        }
-        preload()
-        
-    }, [])
+  useEffect(() => {
+    async function preload() {
+      setLoading(true);
+      const { result } = await fakeFetchCrypto();
+      const assetsData = await fetchAssets();
 
-    return <CryptoContext.Provider value={{
+      setCrypto(result);
+
+      getAssets(assetsData, result);
+      setLoading(false);
+    }
+    preload();
+  }, []);
+
+  function getAssets(assets, result) {
+    assets
+      ? setAssets(
+          assets.map((asset) => {
+            const coin = result.find((c) => c.id === asset.id);
+            return {
+              grow: asset.price < coin.price,
+              growPercent: calculatePercentageDifference(
+                asset.price,
+                coin.price
+              ),
+              totalAmount: asset.amount * coin.price,
+              totalProfit:
+                asset.amount * coin.price - asset.amount * asset.price,
+              ...asset,
+            };
+          })
+        )
+      : setAssets(assets);
+  }
+
+  function removeAsset(id) {
+    const updatedAssets = assets.filter((asset) => asset.id !== id);
+    setAssets(updatedAssets);
+
+    localStorage.setItem("cryptoAssets", JSON.stringify(updatedAssets));
+  }
+
+  function addAsset(asset) {
+    const coin = crypto.find((c) => c.id === asset.id);
+    setAssets((prevAssets) => [
+        ...prevAssets,
+        {
+          grow: asset.price < coin.price,
+          growPercent: calculatePercentageDifference(asset.price, coin.price),
+          totalAmount: asset.amount * coin.price,
+          totalProfit: asset.amount * coin.price - asset.amount * asset.price,
+          ...asset,
+        },
+      ]);
+  }
+
+  return (
+    <CryptoContext.Provider
+      value={{
         assets,
         crypto,
-        loading
-    }}>
-        {children}
+        loading,
+        removeAsset,
+        addAsset,
+      }}
+    >
+      {children}
     </CryptoContext.Provider>
+  );
 }
 
-export function useCrypto(){
-    return useContext(CryptoContext);
+export function useCrypto() {
+  return useContext(CryptoContext);
 }

@@ -6,8 +6,10 @@ import {
   validateTime,
 } from "../utils";
 import { useState } from "react";
+import { useCrypto } from "../context/crypto-context";
 
 const AddAssetForm = ({ coin, getResultData }) => {
+  const { addAsset } = useCrypto();
   const [form] = Form.useForm();
   const [disableTime, setDisableTime] = useState(true);
   const [today, setToday] = useState(false);
@@ -15,11 +17,17 @@ const AddAssetForm = ({ coin, getResultData }) => {
 
   function onFinish(values) {
     console.log("values:", values);
+    addAsset({
+      amount: values.amount,
+      date: values.date.$d,
+      id: coin.id,
+      price: values.price,
+    });
     getResultData({
       name: coin.name,
       amount: values.amount,
       price: values.price,
-    })
+    });
   }
 
   function changeValues(changedValue, allValues) {
@@ -40,7 +48,9 @@ const AddAssetForm = ({ coin, getResultData }) => {
         return;
       }
       form.setFieldsValue({
-        total: changedValue.amount ? +(changedValue.amount * allValues.price).toFixed(2) : +(changedValue.price * allValues.amount).toFixed(2),
+        total: changedValue.amount
+          ? +(changedValue.amount * allValues.price).toFixed(2)
+          : +(changedValue.price * allValues.amount).toFixed(2),
       });
     }
     if (changedValue.date) {

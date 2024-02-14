@@ -1,4 +1,4 @@
-import { cryptoAssets, cryptoData } from "./data";
+import { cryptoData } from "./data";
 
 
 export function fakeFetchCrypto(){
@@ -9,10 +9,12 @@ export function fakeFetchCrypto(){
     })
 }
 
-export function fakeFetchAssets(){
+export function fetchAssets(){
     return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(cryptoAssets)
-        }, 300)
+        if(localStorage.getItem('cryptoAssets')){
+            resolve(JSON.parse(localStorage.getItem('cryptoAssets')))
+        } else{
+            resolve(null)
+        }
     })
 }
