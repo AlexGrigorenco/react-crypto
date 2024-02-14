@@ -7,7 +7,7 @@ import {
 } from "../utils";
 import { useState } from "react";
 
-const AddAssetForm = ({ coin }) => {
+const AddAssetForm = ({ coin, getResultData }) => {
   const [form] = Form.useForm();
   const [disableTime, setDisableTime] = useState(true);
   const [today, setToday] = useState(false);
@@ -15,6 +15,11 @@ const AddAssetForm = ({ coin }) => {
 
   function onFinish(values) {
     console.log("values:", values);
+    getResultData({
+      name: coin.name,
+      amount: values.amount,
+      price: values.price,
+    })
   }
 
   function changeValues(changedValue, allValues) {
@@ -35,7 +40,7 @@ const AddAssetForm = ({ coin }) => {
         return;
       }
       form.setFieldsValue({
-        total: +(changedValue.amount * allValues.price).toFixed(2),
+        total: changedValue.amount ? +(changedValue.amount * allValues.price).toFixed(2) : +(changedValue.price * allValues.amount).toFixed(2),
       });
     }
     if (changedValue.date) {

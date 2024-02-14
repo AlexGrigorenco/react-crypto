@@ -1,61 +1,106 @@
-import { Button, Drawer, Flex } from "antd";
+import { Button, Drawer, Flex, Result } from "antd";
 import { useResize } from "../hooks/useResize";
 import CryptoSelect from "./CryptoSelect";
 import { useState } from "react";
 import AddAssetForm from "./AddAssetForm";
 import { useCrypto } from "../context/crypto-context";
 
-const CryptoDrawer = ({isOpen, closeDrawer}) => {
-    const { xm, sm, md } = useResize();
-    const [coin, setCoin] = useState(null);
-    const {crypto} = useCrypto()
+const CryptoDrawer = ({ isOpen, closeDrawer }) => {
+  const { xm, sm, md } = useResize();
+  const [coin, setCoin] = useState(null);
+  const { crypto } = useCrypto();
+  const [result, setResult] = useState(false)
+  const [resultData, setResultData] = useState({})
 
-    function setDrawerWidth() {
-        if (xm) {
-          return "80%";
-        }
-        if (sm) {
-          return "60%";
-        }
-        if (md) {
-          return "40%";
-        }
-        return "25%";
-      }
+  function setDrawerWidth() {
+    if (xm) {
+      return "80%";
+    }
+    if (sm) {
+      return "60%";
+    }
+    if (md) {
+      return "40%";
+    }
+    return "25%";
+  }
 
-      function handleClose(){
-        closeDrawer(false)
-        setCoin(null)        
-      }
+  function handleClose() {
+    closeDrawer(false);
+    setCoin(null);
+  }
 
-      function findCoin(coin){
-        setCoin(crypto.find(c => c.id === coin))
-      }
+  function findCoin(coin) {
+    setCoin(crypto.find((c) => c.id === coin));
+  }
 
-    return ( 
-        <Drawer
-        className="main-drawer"
-        title="Set Asset"
-        placement={'right'}
-        closable={false}
-        onClose={() => handleClose()}
-        open={isOpen}
-        width={setDrawerWidth()}
-        
+  function handleResult(data){
+    console.log(data)
+    setResultData(data)
+    setResult(true)
+    setCoin(null)
+  }
+
+  function closeResult(){
+    setResult(false)
+  }
+
+  return (
+    <Drawer
+      className="main-drawer"
+      title="Set Asset"
+      placement={"right"}
+      closable={false}
+      onClose={() => handleClose()}
+      open={isOpen}
+      width={setDrawerWidth()}
+    >
+      <Button
+        style={{ position: "absolute", top: "10px", right: "10px" }}
+        onClick={() => handleClose()}
+        type="primary"
       >
-        <Button style={{position: "absolute", top: '10px', right: '10px',}} onClick={() => handleClose()} type="primary">close</Button>
+        close
+      </Button>
 
-        {coin && <Flex align="center" style={{width: "100%"}} justify="space-between">
+      {coin && (
+        <Flex align="center" style={{ width: "100%" }} justify="space-between">
           <Flex align="center">
-            <img width="30" height="30" src={coin.icon} alt={coin.name} loading="lazy" />
-            <h3 style={{marginLeft: '10px', fontSize: 'clamp(20px, 0.932rem + 1.59vw, 30px)'}}>{coin.name}</h3>
+            <img
+              width="30"
+              height="30"
+              src={coin.icon}
+              alt={coin.name}
+              loading="lazy"
+            />
+            <h3
+              style={{
+                marginLeft: "10px",
+                fontSize: "clamp(20px, 0.932rem + 1.59vw, 30px)",
+              }}
+            >
+              {coin.name}
+            </h3>
           </Flex>
           <div className="coin-reset" onClick={() => setCoin(null)}></div>
-          </Flex>}
+        </Flex>
+      )}
 
-        {!coin ? <CryptoSelect func={findCoin} /> : <AddAssetForm coin={coin} />}
-      </Drawer>
-     );
-}
- 
+      {!coin ? <CryptoSelect func={findCoin} /> : <AddAssetForm coin={coin} getResultData={handleResult} />}
+      {result && (
+        <Result
+          status="success"
+          title="You added new asset!"
+          subTitle={`You added ${resultData.amount} ${resultData.name} coins at a price of ${resultData.price}$`}
+          extra={[
+            <Button onClick={closeResult} type="primary" key="console">
+              OK
+            </Button>
+          ]}
+        />
+      )}
+    </Drawer>
+  );
+};
+
 export default CryptoDrawer;
