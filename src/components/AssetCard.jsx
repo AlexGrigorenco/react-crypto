@@ -11,6 +11,7 @@ const AssetCard = ({asset}) => {
     <Card style={{ margin: 10 }}>
 
       <Button onClick={() => removeAsset(asset.id)} style={{position: 'absolute', top: '10px', right: '10px'}} type="primary" >remove asset</Button>
+      <img width="20" height="20" src={asset.icon} alt="asset.id" />
       
       <Statistic
         title={capitalise(asset.id)}

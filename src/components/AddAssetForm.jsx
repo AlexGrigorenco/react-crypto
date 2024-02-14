@@ -19,9 +19,10 @@ const AddAssetForm = ({ coin, getResultData }) => {
     console.log("values:", values);
     addAsset({
       amount: values.amount,
-      date: values.date.$d,
+      date: values.date.$d.toString(),
       id: coin.id,
       price: values.price,
+      icon: coin.icon,
     });
     getResultData({
       name: coin.name,

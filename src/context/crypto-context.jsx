@@ -67,6 +67,7 @@ export function CryptoContextProvider({ children }) {
           ...asset,
         },
       ]);
+      localStorage.setItem("cryptoAssets", JSON.stringify(assets));
   }
 
   return (

@@ -42,6 +42,7 @@ const CryptoDrawer = ({ isOpen, closeDrawer }) => {
 
   function closeResult(){
     setResult(false)
+    closeDrawer(false)
   }
 
   return (
