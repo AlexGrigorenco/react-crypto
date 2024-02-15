@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const AssetsList = () => {
     const {assets, loading} = useCrypto()
+    console.log(assets)
 
     return ( 
        <>

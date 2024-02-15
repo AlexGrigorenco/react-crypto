@@ -1,13 +1,24 @@
-import { cryptoData } from "./data";
+import axios from "axios";
+import { APIkey, baseURL } from "./constans";
 
-
-export function fakeFetchCrypto(){
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(cryptoData)
-        }, 300)
-    })
-}
+export function getCryptoDAta() {
+    const limit = 1000;
+    const url = `${baseURL}?limit=${limit}`;
+    const options = {
+      headers: {
+        accept: 'application/json',
+        'X-API-KEY': APIkey,
+      }
+    };
+  
+    return axios.get(url, options)
+      .then(response => response.data)
+      .catch(error => {
+        console.error(error);
+        alert('something was wrong! pleas reload page!')
+        return null;
+      });
+  }
 
 export function fetchAssets(){
     return new Promise((resolve) => {

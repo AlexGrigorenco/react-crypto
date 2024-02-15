@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { fetchAssets, fakeFetchCrypto } from "../api";
+import { fetchAssets, getCryptoDAta } from "../api";
 import { calculatePercentageDifference } from "../utils.js";
 
 const CryptoContext = createContext({
@@ -16,7 +16,7 @@ export function CryptoContextProvider({ children }) {
   useEffect(() => {
     async function preload() {
       setLoading(true);
-      const { result } = await fakeFetchCrypto();
+      const { result } = await getCryptoDAta();
       const assetsData = await fetchAssets();
 
       setCrypto(result);
@@ -41,7 +41,12 @@ export function CryptoContextProvider({ children }) {
               totalAmount: asset.amount * coin.price,
               totalProfit:
                 asset.amount * coin.price - asset.amount * asset.price,
-              ...asset,
+              amount: asset.amount,
+              date: asset.date,
+              icon: asset.icon,
+              id: asset.id,
+              prise: asset.price,
+              time: asset.time,
             };
           })
         )
@@ -63,7 +68,12 @@ export function CryptoContextProvider({ children }) {
         growPercent: calculatePercentageDifference(asset.price, coin.price),
         totalAmount: asset.amount * coin.price,
         totalProfit: asset.amount * coin.price - asset.amount * asset.price,
-        ...asset,
+        amount: asset.amount,
+        date: asset.date,
+        icon: asset.icon,
+        id: asset.id,
+        prise: asset.price,
+        time: asset.time,
       },
       ...assets,
     ];
