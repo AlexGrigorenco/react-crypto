@@ -45,7 +45,7 @@ export function CryptoContextProvider({ children }) {
               date: asset.date,
               icon: asset.icon,
               id: asset.id,
-              prise: asset.price,
+              price: asset.price,
               time: asset.time,
             };
           })
@@ -72,7 +72,7 @@ export function CryptoContextProvider({ children }) {
         date: asset.date,
         icon: asset.icon,
         id: asset.id,
-        prise: asset.price,
+        price: asset.price,
         time: asset.time,
       },
       ...assets,
