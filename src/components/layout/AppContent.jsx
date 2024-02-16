@@ -13,10 +13,10 @@ const AppContent = () => {
   const {assets, crypto} = useCrypto()
     return ( 
         <Layout.Content id='app-content'>
-          <h3>Portfolio: {assets.map(asset => {
+          <h3>Portfolio: {assets ? assets.map(asset => {
             const coin = crypto.find(c => c.id === asset.id);
             return asset.amount * asset.price;
-          }).reduce((acc, val) => acc += val, 0).toFixed(2)}$</h3>
+          }).reduce((acc, val) => acc += val, 0).toFixed(2) : 0}$</h3>
         </Layout.Content>
      );
 }

@@ -1,5 +1,6 @@
 import { Modal, Flex, Typography, Tag, Divider, Button } from "antd";
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 const Cryptomodal = ({ data, isOpen, closeModal }) => {
   const [showMore, setShowMore] = useState(false);
@@ -98,7 +99,7 @@ const Cryptomodal = ({ data, isOpen, closeModal }) => {
             {data.explorers && <>
             <div>Explorers: </div>
             {data.explorers.map(link => (
-                <a href={link} style={{display:'block', lineHeight: '1.3'}} target="_blank">{link}</a>
+                <a href={link} style={{display:'block', lineHeight: '1.3'}} key={uuidv4()} target="_blank">{link}</a>
             ))}
             </>}
             </div>}
