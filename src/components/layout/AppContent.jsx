@@ -1,4 +1,5 @@
 import {Layout} from 'antd'
+import { useCrypto } from '../../context/crypto-context';
 
 const contentStyle = {
   textAlign: 'center',
@@ -9,8 +10,14 @@ const contentStyle = {
 };
 
 const AppContent = () => {
+  const {assets, crypto} = useCrypto()
     return ( 
-        <Layout.Content id='app-content'>Content</Layout.Content>
+        <Layout.Content id='app-content'>
+          <h3>Portfolio: {assets.map(asset => {
+            const coin = crypto.find(c => c.id === asset.id);
+            return asset.amount * asset.price;
+          }).reduce((acc, val) => acc += val, 0).toFixed(2)}$</h3>
+        </Layout.Content>
      );
 }
  
