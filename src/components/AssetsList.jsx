@@ -5,8 +5,7 @@ import {useCrypto} from "../context/crypto-context";
 import { v4 as uuidv4 } from 'uuid';
 
 const AssetsList = () => {
-    const {assets, loading} = useCrypto()
-    console.log(assets)
+    const {assets, loading} = useCrypto();
 
     return ( 
        <>

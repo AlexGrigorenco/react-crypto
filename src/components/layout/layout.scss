@@ -35,5 +35,13 @@
 
     h3{
         font-size: clamp(20px, 0.932rem + 1.59vw, 34px);
+
+        .ant-statistic-content{
+            font-size: clamp(20px, 0.932rem + 1.59vw, 34px);
+        }
+
+        .ant-statistic .ant-statistic-title {
+            display: none;
+          }
     }
 }

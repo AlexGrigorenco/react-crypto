@@ -56,7 +56,6 @@ export function CryptoContextProvider({ children }) {
   function removeAsset(id) {
     const updatedAssets = assets.filter((asset) => asset.id !== id);
     setAssets(updatedAssets);
-
     localStorage.setItem("cryptoAssets", JSON.stringify(updatedAssets));
   }
 
