@@ -47,14 +47,15 @@ export function CryptoContextProvider({ children }) {
               id: asset.id,
               price: asset.price,
               time: asset.time,
+              assetId: asset.assetId,
             };
           })
         )
       : setAssets([]);
   }
 
-  function removeAsset(id) {
-    const updatedAssets = assets.filter((asset) => asset.id !== id);
+  function removeAsset(assetId) {
+    const updatedAssets = assets.filter((asset) => asset.assetId !== assetId);
     setAssets(updatedAssets);
     localStorage.setItem("cryptoAssets", JSON.stringify(updatedAssets));
   }
@@ -73,6 +74,7 @@ export function CryptoContextProvider({ children }) {
         id: asset.id,
         price: asset.price,
         time: asset.time,
+        assetId: Date.now(),
       },
       ...assets,
     ]

@@ -29,9 +29,9 @@ const AppContent = () => {
   return (
     <Layout.Content id="app-content">
       <h3>
-        <Flex align="center" >
-        <div>Portfolio: </div>
-        <Statistic
+        <Flex align="center" gap={10}>
+        <div>Portfolio:</div>
+        {assets.length ? <Statistic
           title="Active"
           value={totalAssetsCurrentAmount()}
           precision={3}
@@ -40,7 +40,7 @@ const AppContent = () => {
           }}
           prefix={totalAssetsAmount() < totalAssetsCurrentAmount() ? <ArrowUpOutlined /> : <ArrowDownOutlined/>}
           suffix="$"
-        />
+        /> : '0$'}
         </Flex>
       </h3>
     </Layout.Content>
