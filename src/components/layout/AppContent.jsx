@@ -3,12 +3,7 @@ import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { useCrypto } from "../../context/crypto-context";
 
 const AppContent = () => {
-  const { assets, crypto } = useCrypto();
-
-  const cryptoPrices = crypto.reduce((acc, coin) => {
-    acc[coin.id] = coin.price;
-    return acc;
-  }, {});
+  const { assets, crypto, coinsPricesMap } = useCrypto();
 
   const totalAssetsAmount = () => {
     return assets
@@ -21,7 +16,7 @@ const AppContent = () => {
   const totalAssetsCurrentAmount = () => {
     return assets
       .map((asset) => {
-        return asset.amount * cryptoPrices[asset.id];
+        return asset.amount * coinsPricesMap[asset.id];
       })
       .reduce((acc, val) => (acc += val), 0);
   };

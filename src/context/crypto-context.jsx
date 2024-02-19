@@ -12,35 +12,41 @@ export function CryptoContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [crypto, setCrypto] = useState([]);
   const [assets, setAssets] = useState([]);
+  const [coinsPricesMap, setCoinsPricesMap] = useState({})
+
+  async function preload() {
+    setLoading(true);
+    const { result } = await getCryptoDAta();
+    const assetsData = await fetchAssets();
+
+    const pricesMap = result.reduce((acc, coin) => {
+      acc[coin.id] = coin.price;
+      return acc;
+    }, {});
+
+    setCrypto(result);
+    setCoinsPricesMap(pricesMap)
+
+    getAssets(assetsData, pricesMap);
+    setLoading(false);
+  }
 
   useEffect(() => {
-    async function preload() {
-      setLoading(true);
-      const { result } = await getCryptoDAta();
-      const assetsData = await fetchAssets();
-
-      setCrypto(result);
-
-      getAssets(assetsData, result);
-      setLoading(false);
-    }
     preload();
   }, []);
 
-  function getAssets(assets, result) {
-    assets
-      ? setAssets(
+  function getAssets(assets, coinsPricesMap) {
+    assets ? setAssets(
           assets.map((asset) => {
-            const coin = result.find((c) => c.id === asset.id);
             return {
-              grow: asset.price < coin.price,
+              grow: asset.price < coinsPricesMap[asset.id],
               growPercent: calculatePercentageDifference(
                 asset.price,
-                coin.price
+                coinsPricesMap[asset.id]
               ),
-              totalAmount: asset.amount * coin.price,
+              totalAmount: asset.amount * coinsPricesMap[asset.id],
               totalProfit:
-                asset.amount * coin.price - asset.amount * asset.price,
+                asset.amount * coinsPricesMap[asset.id] - asset.amount * asset.price,
               amount: asset.amount,
               date: asset.date,
               icon: asset.icon,
@@ -61,13 +67,12 @@ export function CryptoContextProvider({ children }) {
   }
 
   function addAsset(asset) {
-    const coin = crypto.find((c) => c.id === asset.id);
     const updatedAssets = [
       {
-        grow: asset.price < coin.price,
-        growPercent: calculatePercentageDifference(asset.price, coin.price),
-        totalAmount: asset.amount * coin.price,
-        totalProfit: asset.amount * coin.price - asset.amount * asset.price,
+        grow: asset.price < coinsPricesMap[asset.id],
+        growPercent: calculatePercentageDifference(asset.price, coinsPricesMap[asset.id]),
+        totalAmount: asset.amount * coinsPricesMap[asset.id],
+        totalProfit: asset.amount * coinsPricesMap[asset.id] - asset.amount * asset.price,
         amount: asset.amount,
         date: asset.date,
         icon: asset.icon,
@@ -88,8 +93,10 @@ export function CryptoContextProvider({ children }) {
         assets,
         crypto,
         loading,
+        coinsPricesMap,
         removeAsset,
         addAsset,
+        
       }}
     >
       {children}
