@@ -36,7 +36,6 @@ export function CryptoContextProvider({ children }) {
 
   useEffect(() => {
     preload();
-    console.log(assets)
   }, []);
 
   function getAssets(assets, coinsMap) {

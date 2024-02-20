@@ -53,3 +53,16 @@ export function validateTime(h, m, s) {
     return true
   }
 }
+
+export function getRandomColors(n) {
+  const colors = [];
+  const letters = '0123456789ABCDEF';
+  for (let j = 0; j < n; j++) {
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    colors.push(color);
+  }
+  return colors;
+}
