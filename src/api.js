@@ -29,3 +29,7 @@ export function fetchAssets(){
         }
     })
 }
+
+export function saveAssets(assets){
+  localStorage.setItem("cryptoAssets", JSON.stringify(assets));
+}

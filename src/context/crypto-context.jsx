@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { fetchAssets, getCryptoDAta } from "../api";
+import { fetchAssets, getCryptoDAta, saveAssets } from "../api";
 import { calculatePercentageDifference } from "../utils.js";
 
 const CryptoContext = createContext({
@@ -67,7 +67,7 @@ export function CryptoContextProvider({ children }) {
   function removeAsset(assetId) {
     const updatedAssets = assets.filter((asset) => asset.assetId !== assetId);
     setAssets(updatedAssets);
-    localStorage.setItem("cryptoAssets", JSON.stringify(updatedAssets));
+    saveAssets(updatedAssets);
   }
 
   function addAsset(asset) {
@@ -89,7 +89,7 @@ export function CryptoContextProvider({ children }) {
       ...assets,
     ]
     setAssets(updatedAssets);
-    localStorage.setItem("cryptoAssets", JSON.stringify(updatedAssets));
+    saveAssets(updatedAssets)
   }
 
   return (
@@ -101,7 +101,7 @@ export function CryptoContextProvider({ children }) {
         coinsMap,
         removeAsset,
         addAsset,
-        
+        setAssets,
       }}
     >
       {children}
