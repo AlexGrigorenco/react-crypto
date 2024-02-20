@@ -35,7 +35,7 @@
 
     h3{
         --font-size: clamp(20px, 0.932rem + 1.59vw, 34px);
-        font-size: var(var(--font-size));
+        font-size: var(--font-size);
 
         .ant-statistic-content{
             font-size: var(--font-size);

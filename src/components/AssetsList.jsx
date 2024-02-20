@@ -19,7 +19,7 @@ const AssetsList = () => {
        <>
        <Flex style={{margin: '10px',}} align="center" justify="space-between">
         <h2 style={{fontSize: 'clamp(20px, 0.932rem + 1.59vw, 34px)'}}>Assets</h2>
-        <Button onClick={clearAssets} type="primary">clear all</Button>
+        {assets.length ? <Button onClick={clearAssets} type="primary">clear all</Button> : null}
        </Flex>
        {loading && <Loader/>}
        {assets && assets.map(asset => {
