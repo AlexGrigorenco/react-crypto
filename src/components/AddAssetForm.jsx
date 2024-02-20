@@ -98,7 +98,7 @@ const AddAssetForm = ({ coin, getResultData }) => {
         onValuesChange={changeValues}
         name="basic"
         labelCol={{
-          span: 6,
+          span: 8,
         }}
         wrapperCol={{
           span: 16,

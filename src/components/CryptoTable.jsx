@@ -28,12 +28,10 @@ const CryptoTable = () => {
       sorter: {
         compare: (a, b) => a.rank - b.rank,
       },
-      width: 20,
     },
     {
       title: "Name",
       dataIndex: "name",
-      width: 100,
     },
     {
       title: "price",
@@ -94,7 +92,7 @@ const CryptoTable = () => {
       english: 89,
     },
   ];
-  return <Table size='small' bordered={true} pagination={false} columns={columns} dataSource={cryptoData} />;
+  return <Table size='small' bordered={true}  columns={columns} dataSource={cryptoData} />;
 };
 
 export default CryptoTable;
