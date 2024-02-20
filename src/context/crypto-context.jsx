@@ -12,7 +12,7 @@ export function CryptoContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [crypto, setCrypto] = useState([]);
   const [assets, setAssets] = useState([]);
-  const [coinsPricesMap, setCoinsPricesMap] = useState({})
+  const [coinsMap, setcoinsMap] = useState({})
 
   async function preload() {
     setLoading(true);
@@ -20,12 +20,15 @@ export function CryptoContextProvider({ children }) {
     const assetsData = await fetchAssets();
 
     const pricesMap = result.reduce((acc, coin) => {
-      acc[coin.id] = coin.price;
+      acc[coin.id] = {
+        price: coin.price,
+        name: coin.name,
+      };
       return acc;
     }, {});
 
     setCrypto(result);
-    setCoinsPricesMap(pricesMap)
+    setcoinsMap(pricesMap)
 
     getAssets(assetsData, pricesMap);
     setLoading(false);
@@ -33,20 +36,21 @@ export function CryptoContextProvider({ children }) {
 
   useEffect(() => {
     preload();
+    console.log(assets)
   }, []);
 
-  function getAssets(assets, coinsPricesMap) {
+  function getAssets(assets, coinsMap) {
     assets ? setAssets(
           assets.map((asset) => {
             return {
-              grow: asset.price < coinsPricesMap[asset.id],
+              grow: asset.price < coinsMap[asset.id].price,
               growPercent: calculatePercentageDifference(
                 asset.price,
-                coinsPricesMap[asset.id]
+                coinsMap[asset.id].price
               ),
-              totalAmount: asset.amount * coinsPricesMap[asset.id],
+              totalAmount: asset.amount * coinsMap[asset.id].price,
               totalProfit:
-                asset.amount * coinsPricesMap[asset.id] - asset.amount * asset.price,
+                asset.amount * coinsMap[asset.id].price - asset.amount * asset.price,
               amount: asset.amount,
               date: asset.date,
               icon: asset.icon,
@@ -54,6 +58,7 @@ export function CryptoContextProvider({ children }) {
               price: asset.price,
               time: asset.time,
               assetId: asset.assetId,
+              name: asset.name,
             };
           })
         )
@@ -69,10 +74,10 @@ export function CryptoContextProvider({ children }) {
   function addAsset(asset) {
     const updatedAssets = [
       {
-        grow: asset.price < coinsPricesMap[asset.id],
-        growPercent: calculatePercentageDifference(asset.price, coinsPricesMap[asset.id]),
-        totalAmount: asset.amount * coinsPricesMap[asset.id],
-        totalProfit: asset.amount * coinsPricesMap[asset.id] - asset.amount * asset.price,
+        grow: asset.price < coinsMap[asset.id].price,
+        growPercent: calculatePercentageDifference(asset.price, coinsMap[asset.id].price),
+        totalAmount: asset.amount * coinsMap[asset.id].price,
+        totalProfit: asset.amount * coinsMap[asset.id].price - asset.amount * asset.price,
         amount: asset.amount,
         date: asset.date,
         icon: asset.icon,
@@ -80,6 +85,7 @@ export function CryptoContextProvider({ children }) {
         price: asset.price,
         time: asset.time,
         assetId: Date.now(),
+        name: coinsMap[asset.id].name,
       },
       ...assets,
     ]
@@ -93,7 +99,7 @@ export function CryptoContextProvider({ children }) {
         assets,
         crypto,
         loading,
-        coinsPricesMap,
+        coinsMap,
         removeAsset,
         addAsset,
         

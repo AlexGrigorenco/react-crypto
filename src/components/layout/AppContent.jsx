@@ -1,9 +1,10 @@
 import { Layout, Statistic, Flex } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { useCrypto } from "../../context/crypto-context";
+import CryptoChart from "../CryptoChart";
 
 const AppContent = () => {
-  const { assets, crypto, coinsPricesMap } = useCrypto();
+  const { assets, crypto, coinsMap } = useCrypto();
 
   const totalAssetsAmount = () => {
     return assets
@@ -16,7 +17,7 @@ const AppContent = () => {
   const totalAssetsCurrentAmount = () => {
     return assets
       .map((asset) => {
-        return asset.amount * coinsPricesMap[asset.id];
+        return asset.amount * coinsMap[asset.id].price;
       })
       .reduce((acc, val) => (acc += val), 0);
   };
@@ -38,6 +39,9 @@ const AppContent = () => {
         /> : '0$'}
         </Flex>
       </h3>
+      <div className="crypto-chart-wrapper">
+      <CryptoChart style={{maxWidth: '600px'}}/>
+      </div>
     </Layout.Content>
   );
 };

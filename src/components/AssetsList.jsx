@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const AssetsList = () => {
     const {assets, loading} = useCrypto();
-
+  console.log(assets)
     return ( 
        <>
        <h2 style={{margin: '10px', fontSize: 'clamp(20px, 0.932rem + 1.59vw, 34px)'}}>Assets</h2>
