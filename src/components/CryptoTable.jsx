@@ -60,7 +60,7 @@ const CryptoTable = () => {
       title: "1w",
       dataIndex: "w",
       sorter: {
-        compare: (a, b) => a.sortW - b.priceChange1w,
+        compare: (a, b) => a.sortW - b.sortW,
       },
     },
   ];
