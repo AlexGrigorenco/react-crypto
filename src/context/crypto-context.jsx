@@ -102,6 +102,7 @@ export function CryptoContextProvider({ children }) {
         removeAsset,
         addAsset,
         setAssets,
+        preload,
       }}
     >
       {children}

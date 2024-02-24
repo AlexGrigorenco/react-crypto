@@ -1,8 +1,8 @@
 import MenuNavIcon from "./MenuNavIcons";
-const MenuNavItem = ({name, iconName}) => {
-    return ( <div className="nav-item">
+const MenuNavItem = ({name, iconName, func, className}) => {
+    return ( <div onClick={func} className={className ? "nav-item" + " " + className : "nav-item"}>
         <MenuNavIcon iconName={iconName} />
-        <span>{name}</span>
+        {name ? <span>{name}</span> : null}
     </div> );
 }
  
