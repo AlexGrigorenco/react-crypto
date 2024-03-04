@@ -1,61 +1,85 @@
+import { Flex } from "antd";
 import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
-  import { Line } from 'react-chartjs-2';
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import CryptoSelect from "../components/CryptoSelect";
+import { useEffect, useState } from "react";
+import PeriodSelect from "../components/PeriodSelect";
+import { getCryptoChart } from "../api";
+import Loader from "../components/Loader";
+import { getRandomColors } from "../utils";
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-  );
-  
-  export const options = {
+const ChartPage = () => {
+    const [loading, setLoading] = useState(false);
+  const [coin, setCoin] = useState(null);
+  const [period, setPeriod] = useState(null);
+  const [chartData, setChartData] = useState([]);
+
+  async function getChart(){
+        setLoading(true)
+        const result = await getCryptoChart(coin, period);
+        setChartData(result);
+        setLoading(false)
+ }
+ useEffect(() => {
+    if(coin && period){
+        getChart()
+    }
+  }, [coin, period]);
+
+ const data = {
+    labels: chartData.map(dataItem => new Date(dataItem[0] * 1000).toLocaleString()),
+    datasets: [
+      {
+        label: coin,
+        data: chartData.map(dataItem => dataItem[1]),
+        borderColor: getRandomColors(1),
+        backgroundColor: getRandomColors(1),
+      }
+    ],
+  };
+
+  const options = {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: "top",
       },
       title: {
         display: true,
-        text: 'Chart.js Line Chart',
+        text: "Crypto Line Chart",
       },
     },
   };
-  
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  
-  export const data = {
-    labels,
-    datasets: [
-      {
-        label: 'Dataset 1',
-        data: [800, 900, 500, 100, 300, 900, 910],
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      },
-      {
-        label: 'Dataset 2',
-        data: [900, 700, 200, 500, 100, 300, 900],
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
-      },
-    ],
-  };
-  
-  const ChartPage = () => {
-    return <Line options={options} data={data} />;
-}
- 
+
+  return (
+    <div>
+      <Flex wrap="wrap" gap={10} style={{ padding: "10px" }}>
+        <CryptoSelect func={(value) => setCoin(value)} />
+        <PeriodSelect func={(value) => setPeriod(value)} />
+      </Flex>
+      {chartData.length ? <Line options={options} data={data} /> : null}
+      {loading && <Loader />}
+    </div>
+  );
+};
+
 export default ChartPage;

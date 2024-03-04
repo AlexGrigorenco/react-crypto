@@ -33,5 +33,23 @@ export function fetchAssets(){
 export function saveAssets(assets){
   localStorage.setItem("cryptoAssets", JSON.stringify(assets));
 }
-true ? 1 : 2
+
+
+export function getCryptoChart(coin, period) {
+  const url = `${baseURL}/${coin}/charts?period=${period}`;
+  const options = {
+    headers: {
+      accept: 'application/json',
+      'X-API-KEY': APIkey,
+    }
+  };
+
+  return axios.get(url, options)
+    .then(response => response.data)
+    .catch(error => {
+      console.error(error);
+      alert('something was wrong! pleas reload page!')
+      return null;
+    });
+}
 

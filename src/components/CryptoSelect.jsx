@@ -10,7 +10,7 @@ const CryptoSelect = ({func}) => {
 
     return ( 
         <Select
-        className="select"
+        className="crypto-select"
         placeholder="select coin"
         onSelect={handleSelect}
         optionLabelProp="label"
