@@ -1,4 +1,4 @@
-const MenuNavIcon = ({ iconName }) => {
+const Icons = ({ iconName }) => {
   if (iconName === "home") {
     return (
       <svg
@@ -54,4 +54,4 @@ const MenuNavIcon = ({ iconName }) => {
   }
 };
 
-export default MenuNavIcon;
+export default Icons;

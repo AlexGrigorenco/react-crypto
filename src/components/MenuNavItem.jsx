@@ -1,7 +1,7 @@
-import MenuNavIcon from "./MenuNavIcons";
+import Icons from "./Icons";
 const MenuNavItem = ({name, iconName, func, className}) => {
     return ( <div onClick={func} className={className ? "nav-item" + " " + className : "nav-item"}>
-        <MenuNavIcon iconName={iconName} />
+        <Icons iconName={iconName} />
         {name ? <span>{name}</span> : null}
     </div> );
 }

@@ -4,6 +4,7 @@
 }
 
 #app-header{
+    padding: 10px;
     color: #fff;
     min-height: 80px;
     background-color: #001529;
@@ -14,12 +15,25 @@
     flex-wrap: wrap;
 
     .select{
-        width: 100%;
+        flex: 1;
         max-width: 250px;
 
         .ant-select-selection-placeholder{
             color: #000;
         }
+    }
+
+    .load-button{
+        --color: #fff;
+        color: var(--color);
+        cursor: pointer;
+
+        padding: 2px;
+        background: #1677ff;
+        border-radius: 8px;
+
+        display: flex;
+        align-items: center;
     }
 }
 
