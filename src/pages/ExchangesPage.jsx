@@ -6,12 +6,14 @@ import ExchangesCard from "../components/ExchangesCard";
 
 const ExchangesPage = () => {
   const [exchanges, setExchanges] = useState([]);
+  const [sort, setSort] = useState([]);
   const [load, setLoad] = useState(false);
 
   async function getExchanges() {
     setLoad(true);
     const result = await getExchangesData();
     setExchanges(result);
+    filterExchanges(result, '');
     setLoad(false);
   }
 
@@ -19,18 +21,17 @@ const ExchangesPage = () => {
     getExchanges();
   }, [])
 
-  function searchExchange(value){
-    console.log(exchanges.sort(ex => ex.name.toLocaleLowerCase() === value.toLocaleLowerCase()))
-    return exchanges.sort(ex => ex.name.toLocaleLowerCase() === value.toLocaleLowerCase())
+  function filterExchanges(arr, value){
+    setSort(arr.filter(ex => ex.name.toLocaleLowerCase().includes(value.toLocaleLowerCase())));
   }
 
   return (
     <div className="exchanges-page">
         <div className="exchanges-header">
-        <Input placeholder="Search..." style={{maxWidth: '250px'}}  onChange={(e) => searchExchange(e.target.value)} />
+        <Input placeholder="Search..." style={{maxWidth: '250px'}}  onChange={(e) => filterExchanges(exchanges, e.target.value)} />
         </div>
       <div className="cards-wrapper">
-      {exchanges.length ? searchExchange('').map(exchange => <ExchangesCard key={exchange.id} exchange={exchange} />) : null}
+      {sort.length ? sort.map(exchange => <ExchangesCard key={exchange.id} exchange={exchange} />) : null}
       </div>
       {load && <Loader />}
     </div>
