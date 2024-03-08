@@ -1,58 +1,65 @@
 .exchanges-page {
     padding: 20px 10px;
-    cursor: pointer;
 
-    display: grid;
-    gap: 10px;
-    grid-template-columns: repeat(4, 1fr);
+    .exchanges-header {
+        padding: 10px 0 20px 0;
+    }
 
-    .card {
-        padding: 20px 8px;
-        border: 1px solid #000;
-        border-radius: 8px;
-        transition: 0.2s linear;
-        background-color: #001529;
-
-        display: flex;
+    .cards-wrapper {
+        display: grid;
         gap: 10px;
-        align-items: center;
+        grid-template-columns: repeat(4, 1fr);
 
-        &:hover {
-            border-color: #fff;
-            transform: scale(1.1);
-            box-shadow: 0 0 4px #fff;
+        @media (max-width: 1000px) {
+            & {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
-
-        .img-wrapper {
-            width: 40px;
-            height: 40px;
-            aspect-ratio: 1/1;
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
+        @media (max-width: 700px) {
+            & {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 400px) {
+            & {
+                grid-template-columns: repeat(1, 1fr);
             }
         }
 
-        h4 {
-            font-size: clamp(20px, 1.023rem + 1.14vw, 30px);
-            word-break: break-all;
+        .card {
+            cursor: pointer;
+            padding: 20px 8px;
+            border: 1px solid #000;
+            border-radius: 8px;
+            transition: 0.2s linear;
+            background-color: #001529;
+
+            display: flex;
+            gap: 10px;
+            align-items: center;
+
+            &:hover {
+                border-color: #fff;
+                transform: scale(1.1);
+                box-shadow: 0 0 4px #fff;
+            }
+
+            .img-wrapper {
+                width: 40px;
+                height: 40px;
+                aspect-ratio: 1/1;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            h4 {
+                font-size: clamp(20px, 1.023rem + 1.14vw, 30px);
+                word-break: break-all;
+            }
         }
-    }
-}
-@media (max-width: 1000px) {
-    .exchanges-page {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-@media (max-width: 700px) {
-    .exchanges-page {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-@media (max-width: 400px) {
-    .exchanges-page {
-        grid-template-columns: repeat(1, 1fr);
     }
 }

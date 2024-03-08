@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Input } from 'antd';
 import Loader from "../components/Loader";
 import { getExchangesData } from "../api";
 import ExchangesCard from "../components/ExchangesCard";
@@ -18,9 +19,19 @@ const ExchangesPage = () => {
     getExchanges();
   }, [])
 
+  function searchExchange(value){
+    console.log(exchanges.sort(ex => ex.name.toLocaleLowerCase() === value.toLocaleLowerCase()))
+    return exchanges.sort(ex => ex.name.toLocaleLowerCase() === value.toLocaleLowerCase())
+  }
+
   return (
     <div className="exchanges-page">
-      {exchanges.length ? exchanges.map(exchange => <ExchangesCard key={exchange.id} exchange={exchange} />) : null}
+        <div className="exchanges-header">
+        <Input placeholder="Search..." style={{maxWidth: '250px'}}  onChange={(e) => searchExchange(e.target.value)} />
+        </div>
+      <div className="cards-wrapper">
+      {exchanges.length ? searchExchange('').map(exchange => <ExchangesCard key={exchange.id} exchange={exchange} />) : null}
+      </div>
       {load && <Loader />}
     </div>
   );

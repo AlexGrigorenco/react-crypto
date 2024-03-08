@@ -2,7 +2,7 @@
 import defaultIcon from "../assets/exchange-icon.jpg";
 
 const ExchangesCard = ({ exchange }) => {
-  console.log(exchange);
+  //console.log(exchange);
   return (
     <div className="card">
           <div className="img-wrapper">
