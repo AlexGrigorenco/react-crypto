@@ -86,7 +86,7 @@ const CryptoDrawer = ({ isOpen, closeDrawer }) => {
         </Flex>
       )}
 
-      {!coin ? <CryptoSelect func={findCoin} /> : <AddAssetForm coin={coin} getResultData={handleResult} />}
+      {!coin ? <div style={{width: '100%'}}><CryptoSelect func={findCoin} /></div> : <AddAssetForm coin={coin} getResultData={handleResult} />}
       {(result && !coin) && (
         <Result
           status="success"
