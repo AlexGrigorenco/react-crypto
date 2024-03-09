@@ -4,7 +4,7 @@ import defaultIcon from "../assets/exchange-icon.jpg";
 const ExchangesCard = ({ exchange }) => {
   //console.log(exchange);
   return (
-    <div className="card">
+    <div onClick={() => console.log(exchange)} className="card">
           <div className="img-wrapper">
             <img
               src={exchange.icon ? exchange.icon : defaultIcon}

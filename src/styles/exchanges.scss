@@ -3,6 +3,10 @@
 
     .exchanges-header {
         padding: 10px 0 20px 0;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
     .cards-wrapper {

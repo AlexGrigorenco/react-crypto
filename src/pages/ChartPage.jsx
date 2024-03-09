@@ -71,7 +71,7 @@ const ChartPage = () => {
   };
 
   return (
-    <div>
+    <div style={{padding: '10px'}}>
       <Flex wrap="wrap" gap={10} style={{ padding: "10px" }}>
         <CryptoSelect func={(value) => setCoin(value)} />
         <PeriodSelect func={(value) => setPeriod(value)} />
