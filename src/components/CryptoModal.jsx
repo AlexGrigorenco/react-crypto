@@ -1,15 +1,20 @@
 import { Modal, Flex, Typography, Tag, Divider, Button } from "antd";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import CryptoCalculator from "./CryptoCalculator";
 
 const Cryptomodal = ({ data, isOpen, closeModal }) => {
   const [showMore, setShowMore] = useState(false);
+
+  function handleCloseModal(){
+    closeModal(false)
+  }
   
   return (
     <Modal
       style={{ maxWidth: "90%" }}
       open={isOpen}
-      onCancel={() => closeModal(false)}
+      onCancel={() => handleCloseModal()}
       footer={null}
     >
       {data && (
@@ -64,6 +69,8 @@ const Cryptomodal = ({ data, isOpen, closeModal }) => {
             </Typography.Text>
           </Flex>
           <Divider />
+          <CryptoCalculator price={data.price} symbol={data.symbol} />
+          <Divider/>
           <Typography.Text>
             <b>Price:</b> {Number(data.price.toFixed(2)).toLocaleString()}$ /{" "}
             {data.priceBtc.toPrecision(3)}Btc
@@ -84,20 +91,20 @@ const Cryptomodal = ({ data, isOpen, closeModal }) => {
           </Typography.Text>{" "}
           <br />
           <Flex style={{ paddingTop: "20px" }} justify="center">
-            <Button type="primary" onClick={() => setShowMore(!showMore)}>
+            {!showMore && <Button type="primary" onClick={() => setShowMore(!showMore)}>
               more info
-            </Button>
+            </Button>}
           </Flex>
           {showMore && <div>
             <Divider/>
-            {data.websiteUrl && <><div>Site: </div><a href={data.websiteUrl} target="_blank" >{data.websiteUrl}</a></>}
+            {data.websiteUrl && <><div><b>Site:</b> </div><a href={data.websiteUrl} target="_blank" >{data.websiteUrl}</a></>}
             <br/>
-            {data.redditUrl && <><div>Reddit: </div><a href={data.redditUrl} target="_blank" >{data.redditUrl}</a></>}
+            {data.redditUrl && <><div><b>Reddit:</b> </div><a href={data.redditUrl} target="_blank" >{data.redditUrl}</a></>}
             <br />
-            {data.twitterUrl && <><div>Reddit: </div><a href={data.twitterUrl} target="_blank" >{data.twitterUrl}</a></>}
+            {data.twitterUrl && <><div><b>Twitter:</b> </div><a href={data.twitterUrl} target="_blank" >{data.twitterUrl}</a></>}
             <br />
             {data.explorers && <>
-            <div>Explorers: </div>
+            <div><b>Explorers:</b> </div>
             {data.explorers.map(link => (
                 <a href={link} style={{display:'block', lineHeight: '1.3'}} key={uuidv4()} target="_blank">{link}</a>
             ))}
