@@ -5,16 +5,12 @@ import CryptoCalculator from "./CryptoCalculator";
 
 const Cryptomodal = ({ data, isOpen, closeModal }) => {
   const [showMore, setShowMore] = useState(false);
-
-  function handleCloseModal(){
-    closeModal(false)
-  }
   
   return (
     <Modal
       style={{ maxWidth: "90%" }}
       open={isOpen}
-      onCancel={() => handleCloseModal()}
+      onCancel={() => closeModal(false)}
       footer={null}
     >
       {data && (
@@ -69,7 +65,7 @@ const Cryptomodal = ({ data, isOpen, closeModal }) => {
             </Typography.Text>
           </Flex>
           <Divider />
-          <CryptoCalculator price={data.price} symbol={data.symbol} />
+          <CryptoCalculator price={data.price} symbol={data.symbol} amount={null} />
           <Divider/>
           <Typography.Text>
             <b>Price:</b> {Number(data.price.toFixed(2)).toLocaleString()}$ /{" "}

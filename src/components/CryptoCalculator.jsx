@@ -1,6 +1,6 @@
 import { Input } from 'antd';
 import Icons from './Icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const CryptoCalculator = ({price, symbol}) => {
 
@@ -11,6 +11,11 @@ const CryptoCalculator = ({price, symbol}) => {
         setCoin(+value)
         setUsd(+value * +price)
     }
+
+    useEffect(() => {
+        setCoin(null)
+        setUsd(null)
+    }, [symbol])
 
     function usdInputHandler(value){
         setUsd(+value)
