@@ -4,7 +4,7 @@ import AppHeader from './AppHeader'
 import AppSideBar from './AppSideBar'
 import AppContent from './AppContent'
 
-export default function App() {
+export default function MainLayout() {
   return (
     <Layout className='layout'>
     <AppHeader/>

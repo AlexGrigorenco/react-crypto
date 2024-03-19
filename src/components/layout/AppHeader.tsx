@@ -7,12 +7,12 @@ import CryptoModal from "../CryptoModal";
 import Icons from "../Icons";
 
 const AppHeader = () => {
-  const [modal, setModal] = useState(false);
-  const [drawer, setDrawer] = useState(false);
-  const [coin, setCoin] = useState(null);
+  const [modal, setModal] = useState<boolean>(false);
+  const [drawer, setDrawer] = useState<boolean>(false);
+  const [coin, setCoin] = useState<object | null>(null);
   const { crypto, preload } = useCrypto();
 
-  function getCoinFromSelect(value) {
+  function getCoinFromSelect(value: object | null): void {
     setCoin(value);
     setModal(true);
   }
