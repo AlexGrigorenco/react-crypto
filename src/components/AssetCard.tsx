@@ -1,7 +1,7 @@
 import { Card, Statistic, List, Typography, Tag, Button } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
-import { capitalise } from "../utils";
-import { useCrypto } from "../context/crypto-context";
+import { capitalise } from "../utils.ts";
+import { useCrypto } from "../context/crypto-context.tsx";
 
 
 const AssetCard = ({asset}) => {

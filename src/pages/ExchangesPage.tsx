@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Input, Select, Space } from 'antd';
-import Loader from "../components/Loader";
-import { getExchangesData } from "../api";
-import ExchangesCard from "../components/ExchangesCard";
+import { Input, Select } from 'antd';
+import Loader from "../components/Loader.tsx";
+import { getExchangesData } from "../api.ts";
+import ExchangesCard from "../components/ExchangesCard.tsx";
 
 const ExchangesPage = () => {
   const [exchanges, setExchanges] = useState([]);

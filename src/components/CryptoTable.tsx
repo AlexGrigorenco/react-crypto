@@ -1,5 +1,5 @@
 import { Table } from "antd";
-import { useCrypto } from "../context/crypto-context";
+import { useCrypto } from "../context/crypto-context.tsx";
 import { v4 as uuidv4 } from "uuid";
 
 const CryptoTable = () => {

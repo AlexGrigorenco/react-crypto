@@ -1,7 +1,7 @@
 import axios from "axios";
-import { APIkey, baseURL } from "./constans";
+import { APIkey, baseURL } from "./constans.ts";
 
-export function getCryptoDAta() {
+export function getCryptoDAta(): Promise<any> {
     const limit = 1000;
     const url = `${baseURL}?limit=${limit}`;
     const options = {
@@ -20,7 +20,7 @@ export function getCryptoDAta() {
       });
   }
 
-export function fetchAssets(){
+export function fetchAssets(): Promise<any>{
     return new Promise((resolve) => {
         if(localStorage.getItem('cryptoAssets')){
             resolve(JSON.parse(localStorage.getItem('cryptoAssets')))
@@ -30,7 +30,7 @@ export function fetchAssets(){
     })
 }
 
-export function saveAssets(assets){
+export function saveAssets(assets: Array<any>){
   localStorage.setItem("cryptoAssets", JSON.stringify(assets));
 }
 

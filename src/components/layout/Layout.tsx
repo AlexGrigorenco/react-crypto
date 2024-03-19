@@ -1,8 +1,8 @@
 import {Layout} from 'antd'
 import "./layout.scss"
-import AppHeader from './AppHeader'
-import AppSideBar from './AppSideBar'
-import AppContent from './AppContent'
+import AppHeader from './AppHeader.tsx'
+import AppSideBar from './AppSideBar.tsx'
+import AppContent from './AppContent.tsx'
 
 export default function MainLayout() {
   return (

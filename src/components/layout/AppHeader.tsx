@@ -1,10 +1,10 @@
 import { Layout, Button, Flex } from "antd";
-import CryptoSelect from "../CryptoSelect";
+import CryptoSelect from "../CryptoSelect.tsx";
 import { useState } from "react";
-import CryptoDrawer from "../CryptoDrawer";
-import { useCrypto } from "../../context/crypto-context";
-import CryptoModal from "../CryptoModal";
-import Icons from "../Icons";
+import CryptoDrawer from "../CryptoDrawer.tsx";
+import { useCrypto } from "../../context/crypto-context.tsx";
+import CryptoModal from "../CryptoModal.tsx";
+import Icons from "../Icons.tsx";
 
 const AppHeader = () => {
   const [modal, setModal] = useState<boolean>(false);

@@ -10,12 +10,12 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import CryptoSelect from "../components/CryptoSelect";
+import CryptoSelect from "../components/CryptoSelect.tsx";
 import { useEffect, useState } from "react";
-import PeriodSelect from "../components/PeriodSelect";
-import { getCryptoChart } from "../api";
-import Loader from "../components/Loader";
-import { getRandomColors } from "../utils";
+import PeriodSelect from "../components/PeriodSelect.tsx";
+import { getCryptoChart } from "../api.ts";
+import Loader from "../components/Loader.tsx";
+import { getRandomColors } from "../utils.ts";
 
 ChartJS.register(
   CategoryScale,

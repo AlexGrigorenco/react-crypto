@@ -1,7 +1,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { useCrypto } from '../context/crypto-context';
-import { getRandomColors } from '../utils';
+import { useCrypto } from '../context/crypto-context.tsx';
+import { getRandomColors } from '../utils.ts';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

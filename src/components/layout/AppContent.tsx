@@ -1,8 +1,8 @@
 import { Layout, Statistic, Flex } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
-import { useCrypto } from "../../context/crypto-context";
-import CryptoChart from "../CryptoChart";
-import CryptoTable from "../CryptoTable";
+import { useCrypto } from "../../context/crypto-context.tsx";
+import CryptoChart from "../CryptoChart.tsx";
+import CryptoTable from "../CryptoTable.tsx";
 
 const AppContent = () => {
   const { assets, coinsMap } = useCrypto();

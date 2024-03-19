@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import {Flex} from 'antd'
-import MenuNavItem from './MenuNavItem';
+import MenuNavItem from './MenuNavItem.tsx';
 
 const MenuNav = () => {
   

@@ -4,9 +4,9 @@ import {
   isToday,
   getRemainingHours,
   validateTime,
-} from "../utils";
+} from "../utils.ts";
 import { useState } from "react";
-import { useCrypto } from "../context/crypto-context";
+import { useCrypto } from "../context/crypto-context.tsx";
 
 const AddAssetForm = ({ coin, getResultData }) => {
   const { addAsset } = useCrypto();

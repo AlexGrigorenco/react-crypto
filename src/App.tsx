@@ -1,10 +1,10 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import HomePage from "./pages/HomePage.tsx"
-import { CryptoContextProvider } from "./context/crypto-context"
+import { CryptoContextProvider } from "./context/crypto-context.tsx"
 import './styles/App.scss'
-import MenuNav from './components/MenuNav'
-import ChartPage from './pages/ChartPage'
-import ExchangesPage from './pages/ExchangesPage'
+import MenuNav from './components/MenuNav.tsx'
+import ChartPage from './pages/ChartPage.tsx'
+import ExchangesPage from './pages/ExchangesPage.tsx'
 
 export default function App(): JSX.Element {
   return (

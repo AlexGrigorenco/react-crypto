@@ -1,9 +1,9 @@
 import { Button, Drawer, Flex, Result } from "antd";
-import { useResize } from "../hooks/useResize";
-import CryptoSelect from "./CryptoSelect";
+import { useResize } from "../hooks/useResize.ts";
+import CryptoSelect from "./CryptoSelect.tsx";
 import { useState } from "react";
-import AddAssetForm from "./AddAssetForm";
-import { useCrypto } from "../context/crypto-context";
+import AddAssetForm from "./AddAssetForm.tsx";
+import { useCrypto } from "../context/crypto-context.tsx";
 
 const CryptoDrawer = ({ isOpen, closeDrawer }) => {
   const { xm, sm, md } = useResize();

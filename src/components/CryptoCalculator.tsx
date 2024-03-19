@@ -1,5 +1,5 @@
 import { Input } from 'antd';
-import Icons from './Icons';
+import Icons from './Icons.tsx';
 import { useEffect, useState } from 'react';
 
 const CryptoCalculator = ({price, symbol}) => {

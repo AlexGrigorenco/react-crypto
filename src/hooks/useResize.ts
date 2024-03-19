@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 export const useResize = () => {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState<number>(window.innerWidth);
 
   const breakpoints = {
     SCREEN_SM: 576,

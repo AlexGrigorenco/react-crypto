@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { fetchAssets, getCryptoDAta, saveAssets } from "../api";
-import { calculatePercentageDifference } from "../utils.js";
+import { fetchAssets, getCryptoDAta, saveAssets } from "../api.ts";
+import { calculatePercentageDifference } from "../utils.ts";
 
 const CryptoContext = createContext({
   assets: [],

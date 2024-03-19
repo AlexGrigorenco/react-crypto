@@ -1,10 +1,10 @@
 
-import AssetCard from "./AssetCard";
-import Loader from "./Loader";
-import {useCrypto} from "../context/crypto-context";
+import AssetCard from "./AssetCard.tsx";
+import Loader from "./Loader.tsx";
+import {useCrypto} from "../context/crypto-context.tsx";
 import { v4 as uuidv4 } from 'uuid';
 import {Flex, Button} from 'antd'
-import { saveAssets } from "../api";
+import { saveAssets } from "../api.ts";
 
 const AssetsList = () => {
     const {assets, setAssets, loading} = useCrypto();

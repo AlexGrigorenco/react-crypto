@@ -1,7 +1,7 @@
 import { Modal, Flex, Typography, Tag, Divider, Button } from "antd";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import CryptoCalculator from "./CryptoCalculator";
+import CryptoCalculator from "./CryptoCalculator.tsx";
 
 const Cryptomodal = ({ data, isOpen, closeModal }) => {
   const [showMore, setShowMore] = useState(false);

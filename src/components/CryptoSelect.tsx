@@ -1,5 +1,5 @@
 import { Space, Select, Typography } from "antd";
-import { useCrypto } from "../context/crypto-context";
+import { useCrypto } from "../context/crypto-context.tsx";
 
 const CryptoSelect = ({func}) => {
     const {crypto} = useCrypto()

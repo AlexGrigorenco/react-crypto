@@ -1,6 +1,6 @@
 import { Layout } from "antd";
-import { useResize } from "../../hooks/useResize";
-import AssetsList from "../AssetsList";
+import { useResize } from "../../hooks/useResize.ts";
+import AssetsList from "../AssetsList.tsx";
 
 const AppSideBar = () => {
   const { xm, sm, md } = useResize();
