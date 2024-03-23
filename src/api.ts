@@ -1,7 +1,7 @@
 import axios from "axios";
-import { APIkey, baseURL } from "./constans.ts";
+import { APIkey, baseURL } from "./constants";
 
-export function getCryptoDAta(): Promise<any> {
+export function getCryptoDAta(): Promise<Array<object>> {
     const limit = 1000;
     const url = `${baseURL}?limit=${limit}`;
     const options = {
@@ -20,22 +20,23 @@ export function getCryptoDAta(): Promise<any> {
       });
   }
 
-export function fetchAssets(): Promise<any>{
+export function fetchAssets(): Promise<Array<object> | null>{
     return new Promise((resolve) => {
-        if(localStorage.getItem('cryptoAssets')){
-            resolve(JSON.parse(localStorage.getItem('cryptoAssets')))
+      const cryptoAssetsString = localStorage.getItem('cryptoAssets');
+        if(cryptoAssetsString !== null){
+            resolve(JSON.parse(cryptoAssetsString))
         } else{
             resolve(null)
         }
     })
 }
 
-export function saveAssets(assets: Array<any>){
+export function saveAssets(assets: Array<Object>){
   localStorage.setItem("cryptoAssets", JSON.stringify(assets));
 }
 
 
-export function getCryptoChart(coin, period) {
+export function getCryptoChart(coin: string, period: number) {
   const url = `${baseURL}/${coin}/charts?period=${period}`;
   const options = {
     headers: {
@@ -53,7 +54,7 @@ export function getCryptoChart(coin, period) {
     });
 }
 
-export function getExchangesData() {
+export function getExchangesData(): Promise<Array<object>> {
   const url = `https://openapiv1.coinstats.app/tickers/exchanges`;
   const options = {
     headers: {
