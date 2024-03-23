@@ -1,18 +1,18 @@
-export const calculatePercentageDifference = (firstNumber, secondNumber) => {
+export const calculatePercentageDifference = (firstNumber: number, secondNumber: number): number => {
   const difference = secondNumber - firstNumber;
   return +((difference / firstNumber) * 100).toFixed(2);
 };
 
-export function capitalise(str) {
+export function capitalise(str: string): string {
   return str.charAt(0).toUpperCase() + str.substring(1);
 }
 
-export function disabledDateFunction(current) {
+export function disabledDateFunction(current: Date) : boolean {
   const currentDate = new Date();
   return current && current > currentDate;
 }
 
-export function isToday(dateObject) {
+export function isToday(dateObject: any): boolean { //! any
   const today = new Date();
   return (
     dateObject.$y === today.getFullYear() &&
@@ -21,7 +21,7 @@ export function isToday(dateObject) {
   );
 }
 
-export function getRemainingHours() {
+export function getRemainingHours(): Array<number> {
   const currentHour = new Date().getHours();
   const hoursInDay = 24;
   const remainingHours = [];
@@ -33,7 +33,7 @@ export function getRemainingHours() {
   return remainingHours;
 }
 
-export function validateTime(h, m, s) {
+export function validateTime(h: number, m: number, s: number): boolean {
   const currentDate = new Date();
   const currentHours = currentDate.getHours();
   const currentMinutes = currentDate.getMinutes();
@@ -54,7 +54,7 @@ export function validateTime(h, m, s) {
   }
 }
 
-export function getRandomColors(n) {
+export function getRandomColors(n: number): Array<string> {
   const colors = [];
   const letters = '0123456789ABCDEF';
   for (let j = 0; j < n; j++) {
