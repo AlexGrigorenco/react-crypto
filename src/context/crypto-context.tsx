@@ -64,7 +64,7 @@ export function CryptoContextProvider({ children }) {
       : setAssets([]);
   }
 
-  function removeAsset(assetId) {
+  function removeAsset(assetId: number) {
     const updatedAssets = assets.filter((asset) => asset.assetId !== assetId);
     setAssets(updatedAssets);
     saveAssets(updatedAssets);

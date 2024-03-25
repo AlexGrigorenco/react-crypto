@@ -13,8 +13,9 @@ export const useResize = () => {
   };
 
   useEffect(() => {
-    const handleResize = (event) => {
-      setWidth(event.target.innerWidth);
+    const handleResize = (event: UIEvent) => {
+      const windowTarget = event.target as Window;
+      setWidth(windowTarget.innerWidth);
     };
     window.addEventListener("resize", handleResize);
     return () => {
