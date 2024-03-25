@@ -1,7 +1,8 @@
 import axios from "axios";
 import { APIkey, baseURL } from "./constants";
+import { Coin } from "./types";
 
-export function getCryptoDAta(): Promise<Array<object>> {
+export function getCryptoDAta(): Promise<Array<Coin>> {
     const limit = 1000;
     const url = `${baseURL}?limit=${limit}`;
     const options = {

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { fetchAssets, getCryptoDAta, saveAssets } from "../api.ts";
 import { calculatePercentageDifference } from "../utils.ts";
+import { Coin } from "../types.ts";
 
 const CryptoContext = createContext({
   assets: [],
@@ -17,6 +18,7 @@ export function CryptoContextProvider({ children }) {
   async function preload() {
     setLoading(true);
     const { result } = await getCryptoDAta();
+    console.log(result)
     const assetsData = await fetchAssets();
 
     const pricesMap = result.reduce((acc, coin) => {
