@@ -1,4 +1,4 @@
-enum IconNameList {
+export enum IconNameList {
   Home = "home",
   Chart = "chart",
   Load = "load",
