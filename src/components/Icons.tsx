@@ -1,4 +1,12 @@
-const Icons = ({ iconName }) => {
+enum IconNameList {
+  Home = "home",
+  Chart = "chart",
+  Load = "load",
+  Exchanges = "exchanges",
+  Calculator = "calculator",
+}
+
+const Icons = ( { iconName }: { iconName: IconNameList }) => {
   if (iconName === "home") {
     return (
       <svg
