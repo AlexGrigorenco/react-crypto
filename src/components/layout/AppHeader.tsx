@@ -5,14 +5,16 @@ import CryptoDrawer from "../CryptoDrawer.tsx";
 import { useCrypto } from "../../context/crypto-context.tsx";
 import CryptoModal from "../CryptoModal.tsx";
 import Icons from "../Icons.tsx";
+import { IconNameList } from "../Icons.tsx";
+import { Coin } from "../../types.ts";
 
 const AppHeader = () => {
   const [modal, setModal] = useState<boolean>(false);
   const [drawer, setDrawer] = useState<boolean>(false);
-  const [coin, setCoin] = useState<object | null>(null);
+  const [coin, setCoin] = useState<string | null>(null);
   const { crypto, preload } = useCrypto();
 
-  function getCoinFromSelect(value: object | null): void {
+  function getCoinFromSelect(value: string): void {
     setCoin(value);
     setModal(true);
   }
@@ -23,10 +25,10 @@ const AppHeader = () => {
       <Button onClick={() => setDrawer(true)} type="primary">
         Add Asset
       </Button>
-      <div onClick={preload} className='load-button'><Icons iconName='load' /> </div>
+      <div onClick={preload} className='load-button'><Icons iconName={IconNameList.Load} /> </div>
       </Flex>
       <CryptoDrawer isOpen={drawer} closeDrawer={setDrawer} />
-      <CryptoModal isOpen={modal} closeModal={setModal} data={crypto.find((c) => c.id === coin)} />
+      <CryptoModal isOpen={modal} closeModal={setModal} data={crypto.find((c: Coin) => c.id === coin)} />
     </Layout.Header>
   );
 };

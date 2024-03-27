@@ -3,7 +3,7 @@ import { useCrypto } from "../context/crypto-context.tsx";
 import { Coin } from "../types.ts";
 
 interface CryptoSelectProps {
-  func: (value: string) => string,
+  func: (value: string) => void,
 }
 
 const CryptoSelect: React.FC<CryptoSelectProps> = ({func}) => {
