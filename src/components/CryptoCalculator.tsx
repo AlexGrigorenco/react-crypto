@@ -1,13 +1,18 @@
 import { Input } from 'antd';
-import Icons from './Icons.tsx';
+import Icons, { IconNameList } from './Icons.tsx';
 import { useEffect, useState } from 'react';
 
-const CryptoCalculator = ({price, symbol}) => {
+interface Props {
+    price: number,
+    symbol: string,
+}
 
-    const [coin, setCoin] = useState(null);
-    const [usd, setUsd] = useState(null);
+const CryptoCalculator = ({price, symbol}: Props) => {
 
-    function cryptoInputHandler(value){
+    const [coin, setCoin] = useState<number | null>(null);
+    const [usd, setUsd] = useState<number | null>(null);
+
+    function cryptoInputHandler(value: string){
         setCoin(+value)
         setUsd(+value * +price)
     }
@@ -17,15 +22,15 @@ const CryptoCalculator = ({price, symbol}) => {
         setUsd(null)
     }, [symbol])
 
-    function usdInputHandler(value){
+    function usdInputHandler(value: string){
         setUsd(+value)
         setCoin( +value / +price)
     }
 
     return ( <div className="crypto-calculator">
-        <Input placeholder={symbol} value={coin ? coin : null} type="number" step="0.01" onChange={(e) => cryptoInputHandler(e.target.value)} />
-        <div style={{paddingRight: '20px'}}><Icons iconName="calculator" /></div>
-        <Input placeholder="USD" value={usd ? usd : null} type="number" step="0.01" onChange={(e) => usdInputHandler(e.target.value)} />
+        <Input placeholder={symbol} value={coin ?? undefined} type="number" step="0.01" onChange={(e) => cryptoInputHandler(e.target.value)} />
+        <div style={{paddingRight: '20px'}}><Icons iconName={IconNameList.Calculator} /></div>
+        <Input placeholder="USD" value={usd ?? undefined} type="number" step="0.01" onChange={(e) => usdInputHandler(e.target.value)} />
     </div> );
 }
  

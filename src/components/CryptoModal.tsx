@@ -2,8 +2,15 @@ import { Modal, Flex, Typography, Tag, Divider, Button } from "antd";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import CryptoCalculator from "./CryptoCalculator.tsx";
+import { Coin } from "../types.ts";
 
-const Cryptomodal = ({ data, isOpen, closeModal }) => {
+interface Props {
+  data: Coin,
+  isOpen: boolean,
+  closeModal: (boolean: boolean) => void,
+}
+
+const Cryptomodal = ({ data, isOpen, closeModal }: Props) => {
   const [showMore, setShowMore] = useState(false);
   
   return (
@@ -21,7 +28,7 @@ const Cryptomodal = ({ data, isOpen, closeModal }) => {
               height="40"
               src={data.icon}
               alt={data.name}
-              loading="lasy"
+              loading="lazy"
             />
             <h3
               style={{
@@ -65,7 +72,7 @@ const Cryptomodal = ({ data, isOpen, closeModal }) => {
             </Typography.Text>
           </Flex>
           <Divider />
-          <CryptoCalculator price={data.price} symbol={data.symbol} amount={null} />
+          <CryptoCalculator price={data.price} symbol={data.symbol} />
           <Divider/>
           <Typography.Text>
             <b>Price:</b> {Number(data.price.toFixed(2)).toLocaleString()}$ /{" "}
